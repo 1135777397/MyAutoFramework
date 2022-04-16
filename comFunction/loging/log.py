@@ -1,6 +1,6 @@
 import os
-import time
 import inspect
+from comFunction.timeDeal import TimeDeal
 from loguru import logger
 from bean.baseConfig import BaseConfig
 
@@ -24,7 +24,7 @@ reportPath = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(os.pat
 if os.path.exists(reportPath) is False:
     os.mkdir(reportPath)
 
-now_time = time.strftime("%Y-%m-%d %H_%M_%S")
+now_time = TimeDeal.getNowTime("%Y-%m-%d %H_%M_%S")
 if BaseConfig.LOG_PATH is None:
     BaseConfig.LOG_PATH = os.path.abspath(os.path.join(logPath, now_time + "_log.log"))
 if BaseConfig.REPORT_PATH is None:
@@ -34,7 +34,7 @@ logger.add(BaseConfig.LOG_PATH, encoding="utf-8")
 
 
 def debug(msg):
-    now = time.strftime("%Y-%m-%d %H:%M:%S")
+    now = TimeDeal.getNowTime("%Y-%m-%d %H:%M:%S")
     if BaseConfig.IS_DEBUG is False:
         print(now + " [DEBUG] " + str(msg))
     if BaseConfig.LOG_COLOR is True:
@@ -45,7 +45,7 @@ def debug(msg):
 
 
 def info(msg):
-    now = time.strftime("%Y-%m-%d_%H:%M:%S")
+    now = TimeDeal.getNowTime("%Y-%m-%d %H:%M:%S")
     if BaseConfig.IS_DEBUG is False:
         print(now + " [INFO] " + str(msg))
     if BaseConfig.LOG_COLOR is True:
@@ -56,7 +56,7 @@ def info(msg):
 
 
 def error(msg):
-    now = time.strftime("%Y-%m-%d %H:%M:%S")
+    now = TimeDeal.getNowTime("%Y-%m-%d %H:%M:%S")
     if BaseConfig.IS_DEBUG is False:
         print(now + " [ERROR] " + str(msg))
     if BaseConfig.LOG_COLOR is True:
@@ -67,7 +67,7 @@ def error(msg):
 
 
 def warn(msg):
-    now = time.strftime("%Y-%m-%d %H:%M:%S")
+    now = TimeDeal.getNowTime("%Y-%m-%d %H:%M:%S")
     if BaseConfig.IS_DEBUG is False:
         print(now + " [WARNING] " + str(msg))
     if BaseConfig.LOG_COLOR is True:
