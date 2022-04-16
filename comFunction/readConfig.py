@@ -1,8 +1,6 @@
 """
 readconfig file
 """
-import logging
-
 """
     author: kawi
     time: 22/04/16
@@ -11,13 +9,12 @@ import logging
 
 import os
 from configparser import ConfigParser
-from comFunction.logging import log
+from comFunction.loging import log
 
 # 定位到配置文件位置
 configPath = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), "config\config.ini")
-log.info()
+log.info("get config.ini information")
 
-# print(path)
 
 class ReadConfig:
     def __init__(self):
@@ -33,6 +30,7 @@ class ReadConfig:
             else:
                 raise Exception("未获取到URL地址，请检查配置文件是否配置测试url地址信息")
         except Exception as e:
+            log.error("ERROR : {}".format(e))
             print("ERROR : {}".format(e))
 
     def get_database(self):
@@ -50,6 +48,7 @@ class ReadConfig:
             else:
                 raise Exception("请检查数据库配置是否配置正常")
         except Exception as e:
+            log.error("ERROR : {}".format(e))
             print("ERROR : {}".format(e))
 
 
