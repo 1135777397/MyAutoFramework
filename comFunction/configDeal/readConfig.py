@@ -12,15 +12,17 @@ from configparser import ConfigParser
 from comFunction.logingDeal import log
 
 # 定位到配置文件位置
-configPath = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), "config\config.ini")
-log.info("get config.ini information")
-
+configPath = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))),
+                          "config\config.ini")
+# log.info("get config.ini information  file:{}".format(configPath))
+log.logger.info(configPath)
 
 class ReadConfig:
     def __init__(self):
         self.config = ConfigParser()
         self.config.read(configPath, encoding="UTF-8")
 
+    @log.logger.catch
     def get_test_url(self):
         """获取测试地址路径"""
         try:
