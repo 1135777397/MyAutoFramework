@@ -9,7 +9,7 @@ readconfig file
 
 import os
 from configparser import ConfigParser
-from comFunction.loging import log
+from comFunction.logingDeal import log
 
 # 定位到配置文件位置
 configPath = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), "config\config.ini")

@@ -1,6 +1,5 @@
 import os
-import inspect
-from comFunction.timeDeal import TimeDeal
+from comFunction.timeDeal.timeDeal import TimeDeal
 from loguru import logger
 from bean.baseConfig import BaseConfig
 
