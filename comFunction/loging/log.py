@@ -4,21 +4,31 @@ import inspect
 from loguru import logger
 from bean.baseConfig import BaseConfig
 
-stack_t = inspect.stack()
-ins = inspect.getframeinfo(stack_t[1][0])
-print(ins)
-file_dir = os.path.dirname(os.path.abspath(ins.filename))
-print(file_dir)
-report_dir = os.path.join(file_dir, "reports")
-print(report_dir)
-if os.path.exists(report_dir) is False:
-    os.mkdir(report_dir)
+"""可以复用的路径生成写法"""
+# stack_t = inspect.stack()
+# ins = inspect.getframeinfo(stack_t[1][0])
+# print(ins)
+# file_dir = os.path.dirname(os.path.abspath(ins.filename))
+# print(file_dir)
+# report_dir = os.path.join(file_dir, "reports")
+# print(report_dir)
+# if os.path.exists(report_dir) is False:
+#     os.mkdir(report_dir)
 
-now_time = time.strftime("%Y-%m-%d %H:%M:%S")
+"""固定路径生成写法"""
+logPath = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'logs')
+if os.path.exists(logPath) is False:
+    os.mkdir(logPath)
+
+reportPath = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'reports')
+if os.path.exists(reportPath) is False:
+    os.mkdir(reportPath)
+
+now_time = time.strftime("%Y-%m-%d %H_%M_%S")
 if BaseConfig.LOG_PATH is None:
-    BaseConfig.LOG_PATH = os.path.join(os.getcwd(), "reports", now_time + "_log.log")
+    BaseConfig.LOG_PATH = os.path.abspath(os.path.join(logPath, now_time + "_log.log"))
 if BaseConfig.REPORT_PATH is None:
-    BaseConfig.REPORT_PATH = os.path.join(os.getcwd(), "reports", now_time + "_result.html")
+    BaseConfig.REPORT_PATH = os.path.abspath(os.path.join(reportPath, now_time + "_result.html"))
 
 logger.add(BaseConfig.LOG_PATH, encoding="utf-8")
 
@@ -73,3 +83,5 @@ def printf(msg):
     else:
         msg = msg.encode('gbk', 'ignore').decode('gbk', "ignore")
         return logger.success(msg)
+
+# if __name__ == '__main__':
