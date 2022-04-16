@@ -1,6 +1,8 @@
 """
 readconfig file
 """
+import logging
+
 """
     author: kawi
     time: 22/04/16
@@ -8,12 +10,12 @@ readconfig file
 """
 
 import os
-import sys
 from configparser import ConfigParser
+from comFunction.logging import log
 
 # 定位到配置文件位置
 configPath = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), "config\config.ini")
-
+log.info()
 
 # print(path)
 
